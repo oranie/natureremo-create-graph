@@ -11,15 +11,15 @@ import (
 )
 
 type Event struct {
-	Val       float64 `json:"val"`
+	Value     float64 `json:"val"`
 	CreatedAt string  `json:"created_at"`
 }
 
 type NewestEvents struct {
-	Hu Event `json:"hu"`
-	Il Event `json:"il"`
-	Mo Event `json:"mo"`
-	Te Event `json:"te"`
+	Humidity     Event `json:"hu"`
+	Illumination Event `json:"il"`
+	Movement     Event `json:"mo"`
+	Temperature  Event `json:"te"`
 }
 
 type User struct {
@@ -43,18 +43,16 @@ type Device struct {
 }
 
 type Env struct {
-	Token string `envconfig:"TOKEN" default:"test"`
+	Token string `envconfig:"REMO_API_TOKEN" default:"test"`
 }
 
 func main() {
 	env := GetEnvValue()
-	fmt.Println(env.Token)
 
 	client := &http.Client{}
 
 	req, err := http.NewRequest("GET", "https://api.nature.global/1/devices", nil)
 	req.Header.Add("Authorization", env.Token)
-	fmt.Println(req)
 
 	resp, err := client.Do(req)
 
@@ -65,17 +63,16 @@ func main() {
 		return
 	}
 	jsonStr := string(body)
-	fmt.Println("Body string : ", jsonStr, err)
-
 	var devices []Device
 	err = json.Unmarshal([]byte(jsonStr), &devices)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println("test json data", jsonStr)
-	fmt.Println("Json parse : ", devices[0].NewestEvents.Hu.Val)
-
+	fmt.Println("Get json response data : ", jsonStr)
+	fmt.Println("Json parse : ", devices[0].Name)
+	res := PutDeviceData(devices[0])
+	fmt.Println(res)
 }
 
 func GetEnvValue() Env {
@@ -86,4 +83,8 @@ func GetEnvValue() Env {
 		log.Fatal(err.Error())
 	}
 	return env
+}
+
+func createGraphData() {
+
 }
