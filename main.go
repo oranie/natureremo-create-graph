@@ -7,40 +7,11 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/oranie/natureremo-create-graph/pkg"
+
 	"github.com/kelseyhightower/envconfig"
+	_ "github.com/oranie/natureremo-create-graph/pkg"
 )
-
-type Event struct {
-	Value     float64 `json:"val"`
-	CreatedAt string  `json:"created_at"`
-}
-
-type NewestEvents struct {
-	Humidity     Event `json:"hu"`
-	Illumination Event `json:"il"`
-	Movement     Event `json:"mo"`
-	Temperature  Event `json:"te"`
-}
-
-type User struct {
-	Id        string `json:"id"`
-	Nickname  string `json:"nickname"`
-	Superuser bool   `json:"superuser"`
-}
-
-type Device struct {
-	Name              string       `json:"name"`
-	Id                string       `json:"id"`
-	CreatedAt         string       `json:"created_at"`
-	UpdatedAt         string       `json:"updated_at"`
-	MacAddress        string       `json:"mac_address"`
-	SerialNumber      string       `json:"serial_number"`
-	FirmwareVersion   string       `json:"firmware_version"`
-	TemperatureOffset int          `json:"temperature_offset"`
-	HumidityOffset    int          `json:"humidity_offset"`
-	Users             []User       `json:"users"`
-	NewestEvents      NewestEvents `json:"newest_events"`
-}
 
 type Env struct {
 	Token string `envconfig:"REMO_API_TOKEN" default:"test"`
@@ -63,7 +34,7 @@ func main() {
 		return
 	}
 	jsonStr := string(body)
-	var devices []Device
+	var devices []pkg.ItemDevice
 	err = json.Unmarshal([]byte(jsonStr), &devices)
 	if err != nil {
 		fmt.Println(err)
@@ -71,7 +42,7 @@ func main() {
 	}
 	fmt.Println("Get json response data : ", jsonStr)
 	fmt.Println("Json parse : ", devices[0].Name)
-	res := PutDeviceData(devices[0])
+	res := pkg.PutDeviceData(devices[0])
 	fmt.Println(res)
 }
 
