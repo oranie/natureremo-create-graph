@@ -34,12 +34,13 @@ func main() {
 		return
 	}
 	jsonStr := string(body)
-	var devices []pkg.ItemDevice
+	var devices []pkg.Device
 	err = json.Unmarshal([]byte(jsonStr), &devices)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
+
 	fmt.Println("Get json response data : ", jsonStr)
 	fmt.Println("Json parse : ", devices[0].Name)
 	res := pkg.PutDeviceData(devices[0])

@@ -57,7 +57,7 @@ func PutDeviceData(deviceData Device) (res *dynamodb.PutItemOutput) {
 	fmt.Println(hu)
 
 	illumination := Item{
-		Id:         deviceData.Id + "_Te",
+		Id:         deviceData.Id + "_Il",
 		Updated_at: deviceData.NewestEvents.Illumination.CreatedAt,
 		Value:      deviceData.NewestEvents.Illumination.Value,
 	}
@@ -66,7 +66,7 @@ func PutDeviceData(deviceData Device) (res *dynamodb.PutItemOutput) {
 
 	var tableName = "NatureRemo"
 
-	_, err = svc.TransactWriteItems(&dynamodb.TransactWriteItemsInput{
+	_, error := svc.TransactWriteItems(&dynamodb.TransactWriteItemsInput{
 		TransactItems: []*dynamodb.TransactWriteItem{
 			{
 				Put: &dynamodb.Put{
@@ -119,18 +119,20 @@ func PutDeviceData(deviceData Device) (res *dynamodb.PutItemOutput) {
 		},
 	})
 
-	fmt.Println("response :", res)
+	fmt.Println("response :", res, "error :", err)
+	fmt.Println("error :", err)
 
-	if err != nil {
+	if error != nil {
 		fmt.Println("Got error calling TransactWriteItems:")
 		fmt.Println(err.Error())
 	}
 
-	res, err = svc.PutItem(input)
+	ressponse, err := svc.PutItem(input)
+
 	if err != nil {
 		fmt.Println("Got error calling PutItem:")
 		fmt.Println(err.Error())
 	}
 
-	return res
+	return ressponse
 }
