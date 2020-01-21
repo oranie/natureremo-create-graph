@@ -35,14 +35,12 @@ func HandleRequest(ctx context.Context, name MyEvent) (string, error) {
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println(err)
-		return
 	}
 	jsonStr := string(body)
 	var devices []Device
 	err = json.Unmarshal([]byte(jsonStr), &devices)
 	if err != nil {
 		fmt.Println(err)
-		return
 	}
 
 	fmt.Println("Get json response data : ", jsonStr)
