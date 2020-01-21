@@ -1,12 +1,14 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 
+	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/kelseyhightower/envconfig"
 )
 
@@ -14,8 +16,18 @@ type Env struct {
 	Token string `envconfig:"REMO_API_TOKEN" default:"test"`
 }
 
+type MyEvent struct {
+	Name string `json:"name"`
+}
+
+func HandleRequest(ctx context.Context, name MyEvent) (string, error) {
+	return fmt.Sprintf("Hello %s!", name.Name), nil
+}
+
 func main() {
+
 	env := GetEnvValue()
+	lambda.Start(HandleRequest)
 
 	client := &http.Client{}
 
