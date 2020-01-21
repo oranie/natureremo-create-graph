@@ -7,10 +7,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/oranie/natureremo-create-graph/pkg"
-
 	"github.com/kelseyhightower/envconfig"
-	_ "github.com/oranie/natureremo-create-graph/pkg"
 )
 
 type Env struct {
@@ -34,7 +31,7 @@ func main() {
 		return
 	}
 	jsonStr := string(body)
-	var devices []pkg.Device
+	var devices []Device
 	err = json.Unmarshal([]byte(jsonStr), &devices)
 	if err != nil {
 		fmt.Println(err)
@@ -43,7 +40,7 @@ func main() {
 
 	fmt.Println("Get json response data : ", jsonStr)
 	fmt.Println("Json parse : ", devices[0].Name)
-	res := pkg.PutDeviceData(devices[0])
+	res := PutDeviceData(devices[0])
 	fmt.Println(res)
 }
 

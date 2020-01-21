@@ -1,4 +1,4 @@
-package pkg
+package main
 
 type Event struct {
 	Value     float64 `json:"val"`
