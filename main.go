@@ -20,7 +20,7 @@ type MyEvent struct {
 	Name string `json:"name"`
 }
 
-func HandleRequest(ctx context.Context, name MyEvent) {
+func HandleRequest(ctx context.Context, name MyEvent) (string, error) {
 	env := GetEnvValue()
 
 	client := &http.Client{}
@@ -47,10 +47,12 @@ func HandleRequest(ctx context.Context, name MyEvent) {
 	res := PutDeviceData(devices[0])
 	fmt.Println(res)
 
+	return fmt.Sprintf("Hello %s!", name.Name), nil
 }
 
 func main() {
 	lambda.Start(HandleRequest)
+
 }
 
 func GetEnvValue() Env {

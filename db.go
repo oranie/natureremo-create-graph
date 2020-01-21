@@ -119,9 +119,6 @@ func PutDeviceData(deviceData Device) (res *dynamodb.PutItemOutput) {
 		},
 	})
 
-	fmt.Println("response :", res, "error :", err)
-	fmt.Println("error :", err)
-
 	if error != nil {
 		fmt.Println("Got error calling TransactWriteItems:")
 		fmt.Println(err.Error())
