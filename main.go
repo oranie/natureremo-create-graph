@@ -53,7 +53,3 @@ func GetEnvValue() Env {
 	}
 	return env
 }
-
-func createGraphData() {
-
-}
