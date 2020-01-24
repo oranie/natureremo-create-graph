@@ -16,6 +16,10 @@ type Item struct {
 	Value      float64 `json:"value"`
 }
 
+type AllSensortData struct {
+	SensorData map[string]map[string]*dynamodb.AttributeValue
+}
+
 //Device データをDynamoDBに書き込む
 func PutDeviceData(deviceData Device) (res *dynamodb.PutItemOutput) {
 	sess, err := session.NewSession(&aws.Config{
@@ -37,31 +41,7 @@ func PutDeviceData(deviceData Device) (res *dynamodb.PutItemOutput) {
 	}
 
 	fmt.Println("start time :", time.Now())
-
-	temperature := Item{
-		Id:         deviceData.Id + "_Te",
-		Updated_at: deviceData.NewestEvents.Temperature.CreatedAt,
-		Value:      deviceData.NewestEvents.Temperature.Value,
-	}
-	te, err := dynamodbattribute.MarshalMap(temperature)
-	fmt.Println(te)
-
-	humidity := Item{
-		Id:         deviceData.Id + "_Hu",
-		Updated_at: deviceData.NewestEvents.Humidity.CreatedAt,
-		Value:      deviceData.NewestEvents.Humidity.Value,
-	}
-
-	hu, err := dynamodbattribute.MarshalMap(humidity)
-	fmt.Println(hu)
-
-	illumination := Item{
-		Id:         deviceData.Id + "_Il",
-		Updated_at: deviceData.NewestEvents.Illumination.CreatedAt,
-		Value:      deviceData.NewestEvents.Illumination.Value,
-	}
-	il, err := dynamodbattribute.MarshalMap(illumination)
-	fmt.Println(il)
+	AllSensorData := GenarateSensorData(deviceData)
 
 	var tableName = "NatureRemo"
 
@@ -70,19 +50,19 @@ func PutDeviceData(deviceData Device) (res *dynamodb.PutItemOutput) {
 			{
 				Put: &dynamodb.Put{
 					TableName: aws.String(tableName),
-					Item:      te,
+					Item:      AllSensorData["temperature"],
 				},
 			},
 			{
 				Put: &dynamodb.Put{
 					TableName: aws.String(tableName),
-					Item:      hu,
+					Item:      AllSensorData["humidity"],
 				},
 			},
 			{
 				Put: &dynamodb.Put{
 					TableName: aws.String(tableName),
-					Item:      il,
+					Item:      AllSensorData["illumination"],
 				},
 			},
 		},
@@ -93,12 +73,60 @@ func PutDeviceData(deviceData Device) (res *dynamodb.PutItemOutput) {
 		fmt.Println(err.Error())
 	}
 
-	ressponse, err := svc.PutItem(input)
+	response, err := svc.PutItem(input)
 
 	if err != nil {
 		fmt.Println("Got error calling PutItem:")
 		fmt.Println(err.Error())
 	}
 
-	return ressponse
+	return response
+}
+func GenarateSensorData(deviceData Device) map[string]map[string]*dynamodb.AttributeValue {
+	allSensorData := map[string]map[string]*dynamodb.AttributeValue{}
+
+	temperature := Item{
+		Id:         deviceData.Id + "_Te",
+		Updated_at: deviceData.NewestEvents.Temperature.CreatedAt,
+		Value:      deviceData.NewestEvents.Temperature.Value,
+	}
+	te, err := dynamodbattribute.MarshalMap(temperature)
+	if err != nil {
+		fmt.Println("Got error set sensorData:")
+		fmt.Println(err.Error())
+	}
+	allSensorData["temperature"] = te
+	fmt.Println(allSensorData["temperature"])
+
+	humidity := Item{
+		Id:         deviceData.Id + "_Hu",
+		Updated_at: deviceData.NewestEvents.Humidity.CreatedAt,
+		Value:      deviceData.NewestEvents.Humidity.Value,
+	}
+
+	hu, err := dynamodbattribute.MarshalMap(humidity)
+	if err != nil {
+		fmt.Println("Got error set sensorData:")
+		fmt.Println(err.Error())
+	}
+	allSensorData["humidity"] = hu
+	fmt.Println(allSensorData["humidity"])
+
+	illumination := Item{
+		Id:         deviceData.Id + "_Il",
+		Updated_at: deviceData.NewestEvents.Illumination.CreatedAt,
+		Value:      deviceData.NewestEvents.Illumination.Value,
+	}
+	il, err := dynamodbattribute.MarshalMap(illumination)
+	allSensorData["illumination"] = il
+	fmt.Println(allSensorData["illumination"])
+
+	if err != nil {
+		fmt.Println("Got error set sensorData:")
+		fmt.Println(err.Error())
+	}
+
+	fmt.Println(allSensorData)
+
+	return allSensorData
 }

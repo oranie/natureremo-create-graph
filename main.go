@@ -9,6 +9,7 @@ import (
 	"net/http"
 
 	"github.com/aws/aws-lambda-go/lambda"
+
 	"github.com/kelseyhightower/envconfig"
 )
 
@@ -52,7 +53,6 @@ func HandleRequest(ctx context.Context, name MyEvent) (string, error) {
 
 func main() {
 	lambda.Start(HandleRequest)
-
 }
 
 func GetEnvValue() Env {
