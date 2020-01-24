@@ -49,13 +49,12 @@ http://swagger.nature.global/#/default/get_1_devices
 
 ### DynamoDB データモデリング
 
-|DataType(PK)|(SK)|Value|
-|---|---|---|
-|DeviceId_Type|unixtime|float|
-|3fa85f64-5717-4562-b3fc-2c963f66afa6|updated_at|device_name and other info|
-|3fa85f64-5717-4562-b3fc-2c963f66afa6_Hu|1579487090|53.2|
-|3fa85f64-5717-4562-b3fc-2c963f66afa6_Te|1579487090|25.1|
-|3fa85f64-5717-4562-b3fc-2c963f66afa6_Il|1579487090|200.0|
+|各項目|DataType(PK)|(SK)|Value|
+|---|---|---|---|
+|デバイスメタデータ|3fa85f64-5717-4562-b3fc-2c963f66afa6|updated_at|device_name and other info|
+|湿度|3fa85f64-5717-4562-b3fc-2c963f66afa6_Hu|1579487090|53.2|
+|温度|3fa85f64-5717-4562-b3fc-2c963f66afa6_Te|1579487090|25.1|
+|照度|3fa85f64-5717-4562-b3fc-2c963f66afa6_Il|1579487090|200.0|
 
 
 

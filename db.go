@@ -66,7 +66,7 @@ func PutDeviceData(deviceData Device) (res *dynamodb.PutItemOutput) {
 
 	var tableName = "NatureRemo"
 
-	_, error := svc.TransactWriteItems(&dynamodb.TransactWriteItemsInput{
+	_, err = svc.TransactWriteItems(&dynamodb.TransactWriteItemsInput{
 		TransactItems: []*dynamodb.TransactWriteItem{
 			{
 				Put: &dynamodb.Put{
@@ -119,7 +119,7 @@ func PutDeviceData(deviceData Device) (res *dynamodb.PutItemOutput) {
 		},
 	})
 
-	if error != nil {
+	if err != nil {
 		fmt.Println("Got error calling TransactWriteItems:")
 		fmt.Println(err.Error())
 	}

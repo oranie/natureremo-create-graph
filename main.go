@@ -47,7 +47,7 @@ func HandleRequest(ctx context.Context, name MyEvent) (string, error) {
 	res := PutDeviceData(devices[0])
 	fmt.Println(res)
 
-	return fmt.Sprintf("Hello %s!", name.Name), nil
+	return fmt.Sprintf("Done!"), nil
 }
 
 func main() {
