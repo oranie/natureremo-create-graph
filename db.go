@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -71,49 +70,19 @@ func PutDeviceData(deviceData Device) (res *dynamodb.PutItemOutput) {
 			{
 				Put: &dynamodb.Put{
 					TableName: aws.String(tableName),
-					Item: map[string]*dynamodb.AttributeValue{
-						"id": {
-							S: aws.String(fmt.Sprintf(temperature.Id)),
-						},
-						"updated_at": {
-							S: aws.String(fmt.Sprintf(temperature.Updated_at)),
-						},
-						"value": {
-							N: aws.String(fmt.Sprintf(strconv.FormatFloat(temperature.Value, 'f', 4, 64))),
-						},
-					},
+					Item:      te,
 				},
 			},
 			{
 				Put: &dynamodb.Put{
 					TableName: aws.String(tableName),
-					Item: map[string]*dynamodb.AttributeValue{
-						"id": {
-							S: aws.String(fmt.Sprintf(humidity.Id)),
-						},
-						"updated_at": {
-							S: aws.String(fmt.Sprintf(humidity.Updated_at)),
-						},
-						"value": {
-							N: aws.String(fmt.Sprintf(strconv.FormatFloat(humidity.Value, 'f', 4, 64))),
-						},
-					},
+					Item:      hu,
 				},
 			},
 			{
 				Put: &dynamodb.Put{
 					TableName: aws.String(tableName),
-					Item: map[string]*dynamodb.AttributeValue{
-						"id": {
-							S: aws.String(fmt.Sprintf(illumination.Id)),
-						},
-						"updated_at": {
-							S: aws.String(fmt.Sprintf(illumination.Updated_at)),
-						},
-						"value": {
-							N: aws.String(fmt.Sprintf(strconv.FormatFloat(illumination.Value, 'f', 4, 64))),
-						},
-					},
+					Item:      il,
 				},
 			},
 		},
