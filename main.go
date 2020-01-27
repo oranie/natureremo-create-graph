@@ -8,8 +8,6 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/aws/aws-lambda-go/lambda"
-
 	"github.com/kelseyhightower/envconfig"
 )
 
@@ -22,6 +20,26 @@ type MyEvent struct {
 }
 
 func HandleRequest(ctx context.Context, name MyEvent) (string, error) {
+	PutGraphData()
+	return fmt.Sprintf("Done!"), nil
+}
+
+func main() {
+	//lambda.Start(HandleRequest)
+	PutGraphData()
+}
+
+func GetEnvValue() Env {
+	var env Env
+	err := envconfig.Process("", &env)
+	fmt.Println(env)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	return env
+}
+
+func PutGraphData() (string, error) {
 	env := GetEnvValue()
 
 	client := &http.Client{}
@@ -49,18 +67,4 @@ func HandleRequest(ctx context.Context, name MyEvent) (string, error) {
 	fmt.Println(res)
 
 	return fmt.Sprintf("Done!"), nil
-}
-
-func main() {
-	lambda.Start(HandleRequest)
-}
-
-func GetEnvValue() Env {
-	var env Env
-	err := envconfig.Process("", &env)
-	fmt.Println(env)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-	return env
 }

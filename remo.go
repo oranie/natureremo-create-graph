@@ -41,7 +41,7 @@ type Device struct {
 
 type Item struct {
 	Id         string  `json:"id"`
-	Updated_at string  `json:"updatedt_at"`
+	Updated_at string  `json:"updated_at"`
 	Value      float64 `json:"value"`
 }
 
