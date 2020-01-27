@@ -89,6 +89,15 @@ func GenarateSensorData(deviceData Device) map[string]map[string]*dynamodb.Attri
 		fmt.Println(err.Error())
 	}
 
+	movement := Item{
+		Id:         deviceData.Id + "_Mo",
+		Updated_at: deviceData.NewestEvents.Movement.CreatedAt,
+		Value:      deviceData.NewestEvents.Movement.Value,
+	}
+	mo, err := dynamodbattribute.MarshalMap(movement)
+	allSensorData["movement"] = mo
+	fmt.Println(allSensorData["movement"])
+
 	fmt.Println(allSensorData)
 
 	return allSensorData

@@ -55,6 +55,12 @@ func PutDeviceData(deviceData Device) (res *dynamodb.PutItemOutput) {
 					Item:      AllSensorData["illumination"],
 				},
 			},
+			{
+				Put: &dynamodb.Put{
+					TableName: aws.String(tableName),
+					Item:      AllSensorData["movement"],
+				},
+			},
 		},
 	})
 
