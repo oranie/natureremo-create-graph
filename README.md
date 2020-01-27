@@ -2,6 +2,8 @@
 
 Nature Remo APIを叩いてデフォルトでは見れない温度、湿度、明るさをグラフ化する
 
+![NatureremoGraph](./NatureRemoGraph.png)
+
 ## 事前準備
 
 API Token発行
