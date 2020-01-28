@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
@@ -48,9 +49,13 @@ type Item struct {
 func GenarateSensorData(deviceData Device) map[string]map[string]*dynamodb.AttributeValue {
 	allSensorData := map[string]map[string]*dynamodb.AttributeValue{}
 
+	now := time.Now()
+	jst := time.FixedZone("Asia/Tokyo", 9*60*60)
+	nowJST := now.In(jst).Format("2006-01-02T15:04:05Z")
+
 	temperature := Item{
 		Id:         deviceData.Id + "_Te",
-		Updated_at: deviceData.NewestEvents.Temperature.CreatedAt,
+		Updated_at: nowJST,
 		Value:      deviceData.NewestEvents.Temperature.Value,
 	}
 	te, err := dynamodbattribute.MarshalMap(temperature)
@@ -63,7 +68,7 @@ func GenarateSensorData(deviceData Device) map[string]map[string]*dynamodb.Attri
 
 	humidity := Item{
 		Id:         deviceData.Id + "_Hu",
-		Updated_at: deviceData.NewestEvents.Humidity.CreatedAt,
+		Updated_at: nowJST,
 		Value:      deviceData.NewestEvents.Humidity.Value,
 	}
 
@@ -77,7 +82,7 @@ func GenarateSensorData(deviceData Device) map[string]map[string]*dynamodb.Attri
 
 	illumination := Item{
 		Id:         deviceData.Id + "_Il",
-		Updated_at: deviceData.NewestEvents.Illumination.CreatedAt,
+		Updated_at: nowJST,
 		Value:      deviceData.NewestEvents.Illumination.Value,
 	}
 	il, err := dynamodbattribute.MarshalMap(illumination)
@@ -91,7 +96,7 @@ func GenarateSensorData(deviceData Device) map[string]map[string]*dynamodb.Attri
 
 	movement := Item{
 		Id:         deviceData.Id + "_Mo",
-		Updated_at: deviceData.NewestEvents.Movement.CreatedAt,
+		Updated_at: nowJST,
 		Value:      deviceData.NewestEvents.Movement.Value,
 	}
 	mo, err := dynamodbattribute.MarshalMap(movement)
