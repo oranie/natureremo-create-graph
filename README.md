@@ -53,10 +53,11 @@ http://swagger.nature.global/#/default/get_1_devices
 
 |各項目|DataType(PK)|(SK)|Value|
 |---|---|---|---|
-|デバイスメタデータ|3fa85f64-5717-4562-b3fc-2c963f66afa6|updated_at|device_name and other info|
-|湿度|3fa85f64-5717-4562-b3fc-2c963f66afa6_Hu|1579487090|53.2|
-|温度|3fa85f64-5717-4562-b3fc-2c963f66afa6_Te|1579487090|25.1|
-|照度|3fa85f64-5717-4562-b3fc-2c963f66afa6_Il|1579487090|200.0|
+|デバイスメタデータ|3fa85f64-5717-4562-b3fc-2c963f66afa6|2020-01-21T00:51:46Z|device_name and other info|
+|湿度|3fa85f64-5717-4562-b3fc-2c963f66afa6_Hu|2020-01-21T00:51:46Z|53.2|
+|温度|3fa85f64-5717-4562-b3fc-2c963f66afa6_Te|2020-01-21T00:51:46Z|25.1|
+|照度|3fa85f64-5717-4562-b3fc-2c963f66afa6_Il|2020-01-21T00:51:46Z|200.0|
+|動作センサー|3fa85f64-5717-4562-b3fc-2c963f66afa6_Mo|2020-01-21T00:51:46Z|2.0|
 
 
 
