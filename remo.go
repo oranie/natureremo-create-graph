@@ -64,7 +64,6 @@ func GenarateSensorData(deviceData Device) map[string]map[string]*dynamodb.Attri
 		fmt.Println(err.Error())
 	}
 	allSensorData["temperature"] = te
-	fmt.Println(allSensorData["temperature"])
 
 	humidity := Item{
 		Id:         deviceData.Id + "_Hu",
@@ -78,7 +77,6 @@ func GenarateSensorData(deviceData Device) map[string]map[string]*dynamodb.Attri
 		fmt.Println(err.Error())
 	}
 	allSensorData["humidity"] = hu
-	fmt.Println(allSensorData["humidity"])
 
 	illumination := Item{
 		Id:         deviceData.Id + "_Il",
@@ -87,7 +85,6 @@ func GenarateSensorData(deviceData Device) map[string]map[string]*dynamodb.Attri
 	}
 	il, err := dynamodbattribute.MarshalMap(illumination)
 	allSensorData["illumination"] = il
-	fmt.Println(allSensorData["illumination"])
 
 	if err != nil {
 		fmt.Println("Got error set sensorData:")
@@ -101,9 +98,8 @@ func GenarateSensorData(deviceData Device) map[string]map[string]*dynamodb.Attri
 	}
 	mo, err := dynamodbattribute.MarshalMap(movement)
 	allSensorData["movement"] = mo
-	fmt.Println(allSensorData["movement"])
 
-	fmt.Println(allSensorData)
+	fmt.Println("All sensor data : ", allSensorData)
 
 	return allSensorData
 }
