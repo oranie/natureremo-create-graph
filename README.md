@@ -61,6 +61,7 @@ http://swagger.nature.global/#/default/get_1_devices
 
 
 
-
+# License
+This library is licensed under the MIT-0 License. See the LICENSE file.
 
 
