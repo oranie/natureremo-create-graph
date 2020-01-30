@@ -4,6 +4,13 @@ Nature Remo APIを叩いてデフォルトでは見れない温度、湿度、�
 
 ![NatureremoGraph](./NatureRemoGraph.png)
 
+## Architecture
+Lambda -> DynamoDB -> Glue -> S3 -> Athena -> QuickSight
+
+## Hands on
+
+[Hands-on contents is here.](./handson/summary.md) 
+
 ## 事前準備
 
 API Token発行
