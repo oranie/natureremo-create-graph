@@ -19,7 +19,7 @@ https://home.nature.global/
 
 ## Data Modeling
 
-sample Jsonデータ
+sample Json data
 http://swagger.nature.global/#/default/get_1_devices
 
 ```Json
@@ -56,15 +56,15 @@ http://swagger.nature.global/#/default/get_1_devices
 ]
 ```
 
-### DynamoDB データモデリング
+### DynamoDB data modeling(Sample)
 
-|各項目|DataType(PK)|(SK)|Value|
+|SensorData type|DataType(PK)|updated_at(SK)|Value|
 |---|---|---|---|
-|デバイスメタデータ|3fa85f64-5717-4562-b3fc-2c963f66afa6|2020-01-21T00:51:46Z|device_name and other info|
-|湿度|3fa85f64-5717-4562-b3fc-2c963f66afa6_Hu|2020-01-21T00:51:46Z|53.2|
-|温度|3fa85f64-5717-4562-b3fc-2c963f66afa6_Te|2020-01-21T00:51:46Z|25.1|
-|照度|3fa85f64-5717-4562-b3fc-2c963f66afa6_Il|2020-01-21T00:51:46Z|200.0|
-|動作センサー|3fa85f64-5717-4562-b3fc-2c963f66afa6_Mo|2020-01-21T00:51:46Z|2.0|
+|device meta data|3fa85f64-5717-4562-b3fc-2c963f66afa6|2020-01-21T00:51:46Z (format:yyyy-MM-dd'T'HH:mm:ss'Z')|device_name and other info|
+|Humidity|3fa85f64-5717-4562-b3fc-2c963f66afa6_Hu|2020-01-21T00:51:46Z|53.2|
+|Temperature|3fa85f64-5717-4562-b3fc-2c963f66afa6_Te|2020-01-21T00:51:46Z|25.1|
+|Illumination|3fa85f64-5717-4562-b3fc-2c963f66afa6_Il|2020-01-21T00:51:46Z|200.0|
+|Movement|3fa85f64-5717-4562-b3fc-2c963f66afa6_Mo|2020-01-21T00:51:46Z|2.0|
 
 
 
