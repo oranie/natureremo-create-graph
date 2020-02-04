@@ -17,6 +17,7 @@ func PutDeviceData(deviceData Device) (res *dynamodb.PutItemOutput) {
 	)
 
 	svc := dynamodb.New(sess)
+	//deviceData.UpdatedAt = time.RFC3339
 	av, err := dynamodbattribute.MarshalMap(deviceData)
 	input := &dynamodb.PutItemInput{
 		Item:                   av,
@@ -68,7 +69,6 @@ func PutDeviceData(deviceData Device) (res *dynamodb.PutItemOutput) {
 		fmt.Println("Got error calling TransactWriteItems:")
 		fmt.Println(err.Error())
 	}
-
 	response, err := svc.PutItem(input)
 
 	if err != nil {

@@ -25,7 +25,7 @@ glue_context.write_dynamic_frame_from_options(
     frame=dyf,
     connection_type='s3',
     connection_options={
-        'path': "s3://oranie-glue/glue/narita-ddb2s3/"
+        'path': "s3://example-bucket/glue/ddb2s3/"
     },
     format='parquet'
 )
@@ -35,7 +35,7 @@ glue_context.write_dynamic_frame_from_options(
 #    frame=dyf,
 #    connection_type='s3',
 #    connection_options={
-#        'path': "s3://sekiyama-bucket/glue/narita-ddb2s3/"
+#        'path': "s3://example-bucket/glue/ddb2s3/"
 #        'partitionKeys': ["year", "month", "day"]
 #    },
 #    format='parquet'
