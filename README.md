@@ -6,6 +6,7 @@ Nature Remo APIを叩いてデフォルトでは見れない温度、湿度、�
 
 ## Architecture
 Lambda -> DynamoDB -> Glue -> S3 -> Athena -> QuickSight
+![Architecture](./architecture.png)
 
 ## Hands on
 
